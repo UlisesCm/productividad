@@ -1,0 +1,13 @@
+.app_sell_main_container {
+  width: 100vw;
+}
+.main_container {
+  width: 95vw;
+}
+
+.app_sell_header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}

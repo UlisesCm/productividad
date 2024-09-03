@@ -16,13 +16,17 @@
     "@mantine/form": "^7.12.2",
     "@mantine/hooks": "^7.12.2",
     "@mantine/notifications": "^7.12.2",
+    "@tabler/icons-react": "^3.14.0",
     "dayjs": "^1.11.13",
+    "luxon": "^3.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.1",
     "recharts": "2"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@types/luxon": "^3.4.2",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",

@@ -1,14 +1,26 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "@mantine/core/styles.css";
+import MainLayout from "./layouts/MainLayout/MainLayout.tsx";
 import { MantineProvider } from "@mantine/core";
-import App from "./App.tsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Task from "./pages/task.page.tsx";
+
 import "./index.css";
+import "@mantine/core/styles.css";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Task />,
+  },
+]);
 
 createRoot(document.getElementById("root")!).render(
   <MantineProvider>
     <StrictMode>
-      <App />
+      <MainLayout>
+        <RouterProvider router={router} />
+      </MainLayout>
     </StrictMode>
   </MantineProvider>,
 );
