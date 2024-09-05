@@ -1,6 +1,7 @@
-import { createContext, PropsWithChildren, useState } from "react";
+import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { hardCodeData } from "../data/data";
 import { Task } from "../interfaces/task.interface";
+import { seed } from "../utils/seed";
 
 interface ContextProps {
   data: Task[];
@@ -33,7 +34,7 @@ export const DBContext = createContext<ContextProps>({
 });
 
 export const DBProvider = ({ children }: PropsWithChildren) => {
-  const [data, setData] = useState<Task[]>(hardCodeData);
+  const [data, setData] = useState<Task[]>([]);
   const [filter, setFilter] = useState<string | null>(null);
 
   const addTask = (task: Task) => {
@@ -67,6 +68,11 @@ export const DBProvider = ({ children }: PropsWithChildren) => {
     };
     setData([...data]);
   };
+
+  useEffect(() => {
+    const dataSeed = seed();
+    setData(dataSeed);
+  }, []);
 
   return (
     <DBContext.Provider

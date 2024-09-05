@@ -1,6 +1,5 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import MainLayout from "./layouts/MainLayout/MainLayout.tsx";
 import { MantineProvider } from "@mantine/core";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { DBProvider } from "./context/dbContext.tsx";

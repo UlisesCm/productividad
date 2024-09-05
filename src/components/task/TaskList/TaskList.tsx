@@ -11,7 +11,7 @@ interface TaskListProps {
 
 const TaskList = ({ filter, sort }: TaskListProps) => {
   const { data } = useContext(DBContext);
-  const [dataFilter, setDataFilter] = useState<Task[]>(data);
+  const [tasks, setTasks] = useState<Task[]>(data);
 
   const filterData = (data: Task[]): Task[] => {
     let filteredData = [...data];
@@ -77,8 +77,6 @@ const TaskList = ({ filter, sort }: TaskListProps) => {
         break;
 
       default:
-        console.log("sort default");
-
         break;
     }
 
@@ -88,12 +86,12 @@ const TaskList = ({ filter, sort }: TaskListProps) => {
   useEffect(() => {
     const dataFiltered = filterData(data);
     const dataSorted = sortData(dataFiltered, sort);
-    setDataFilter(dataSorted);
-  }, [filter, sort]);
+    setTasks(dataSorted);
+  }, [filter, sort, data]);
 
   return (
     <Stack mt={"md"}>
-      {dataFilter.map((task) => (
+      {tasks.map((task) => (
         <TaskCard key={task.id} task={task} />
       ))}
     </Stack>

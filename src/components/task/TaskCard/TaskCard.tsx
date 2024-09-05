@@ -1,7 +1,11 @@
-import { Button, Group, Paper, Text } from "@mantine/core";
+import { Badge, Box, Button, Group, Paper, Text } from "@mantine/core";
 import MenuButton from "../MenuButton/MenuButton";
 import { Task } from "../../../interfaces/task.interface";
-import { TaskStatus, TaskStatusLabel } from "../../../enums/task.enum";
+import {
+  TaskStatus,
+  TaskStatusColor,
+  TaskStatusLabel,
+} from "../../../enums/task.enum";
 import CountdownTimer from "../CountdownTimer/CountdownTimer";
 import { useContext, useState } from "react";
 import { DBContext } from "../../../context/dbContext";
@@ -45,15 +49,16 @@ const TaskCard = ({ task }: TaskCardProps) => {
   return (
     <Paper shadow="xs" withBorder p="md">
       <Group justify="space-between">
+        <Badge color={TaskStatusColor[status]}>{TaskStatusLabel[status]}</Badge>
+
+        <MenuButton task={task} remainingTimeState={remainingTimeState} />
+      </Group>
+      <Box ml={5}>
         <Text fz={"md"} fw={600}>
           {title}
         </Text>
-        <MenuButton task={task} remainingTimeState={remainingTimeState} />
-      </Group>
-      <Text fz={"sm"} mt={"xs"}>
-        Estado: {TaskStatusLabel[status]}
-      </Text>
-      <Text fz={"sm"}>{description}</Text>
+        <Text fz={"sm"}>{description}</Text>
+      </Box>
       <CountdownTimer
         status={status}
         seconds={remainingTime}
@@ -70,11 +75,11 @@ const TaskCard = ({ task }: TaskCardProps) => {
         </Button>
       </Group>
       {showMore && (
-        <>
+        <Box ml={5}>
           <Text size="xs">Tiempo inicial: {secondsToString(timeAssigned)}</Text>
           <Text size="xs">Creada: {formatDate(createdAt)}</Text>
           <Text size="xs">Ultima actualización: {formatDate(updatedAt)}</Text>
-        </>
+        </Box>
       )}
     </Paper>
   );

@@ -11,3 +11,10 @@ export enum TaskStatusLabel {
   finished = "Finalizada",
   deleted = "Eliminada",
 }
+
+export enum TaskStatusColor {
+  active = "blue",
+  paused = "gray",
+  finished = "green",
+  deleted = "red",
+}
