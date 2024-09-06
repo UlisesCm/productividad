@@ -17,11 +17,11 @@ Los usuarios pueden realizar las siguientes acciones:
 - Crear una tarea ✅
 - Modificar una tarea (descripción de la tarea y duración) ✅
 - Eliminar una tarea ✅
-- Reordenar la lista de tareas
+- Reordenar la lista de tareas ✅
 - Comenzar con la tarea en curso
 - Pausar, detener o reiniciar el temporizador ✅
 - Marcar la tarea en curso como finalizada ✅
-- Ver el historial de tareas completadas
+- Ver el historial de tareas completadas ✅
 - Ver una gráfica de su historial de tareas en la última semana
 - Filtrar la lista de tareas pendientes según su duración: ✅
   - Corto: 30 min o menos
@@ -32,10 +32,10 @@ Los usuarios pueden realizar las siguientes acciones:
 
 - La tarea en curso es la tarea que está al inicio de la lista.
 - Al marcar la tarea en curso como completada, debe registrarse el tiempo que tomó al usuario completar dicha tarea.
-- Al cerrar la aplicación, el temporizador siempre se pausa.
-- Se manejan tres duraciones predeterminadas para una tarea (corta: 30 min, media: 45 min, larga: 1h)
+- Al cerrar la aplicación, el temporizador siempre se pausa. ✅
+- Se manejan tres duraciones predeterminadas para una tarea (corta: 30 min, media: 45 min, larga: 1h) ✅
 - El usuario también puede definir su propia duración en minutos y segundos para una tarea, la cual no puede superar las dos horas.
-- Al expirar el tiempo de la tarea en curso, ésta se marca como completada
+- Al expirar el tiempo de la tarea en curso, ésta se marca como completada ✅
 
 ## Especificaciones técnicas
 

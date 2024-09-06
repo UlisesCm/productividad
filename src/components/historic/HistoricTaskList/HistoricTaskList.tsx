@@ -1,19 +1,18 @@
 import { useContext } from "react";
 import { DBContext } from "../../../context/dbContext";
 import { Stack } from "@mantine/core";
-import TaskCard from "../TaskCard/TaskCard";
-import { Source } from "../../../constants/global.constants";
+import TaskCard from "../../task/TaskCard/TaskCard";
 import { useData } from "../../../hooks/useData";
+import { Source } from "../../../constants/global.constants";
 
-interface TaskListProps {
+interface HistoricTaskListProps {
   filter: string | null;
   sort: string | null;
 }
 
-const TaskList = ({ filter, sort }: TaskListProps) => {
+const HistoricTaskList = ({ filter, sort }: HistoricTaskListProps) => {
   const { data } = useContext(DBContext);
-  const { tasks } = useData({ data, source: Source.TASKS, filter, sort });
-
+  const { tasks } = useData({ data, source: Source.HISTORIC, filter, sort });
   return (
     <Stack mt={"md"}>
       {tasks.map((task) => (
@@ -23,4 +22,4 @@ const TaskList = ({ filter, sort }: TaskListProps) => {
   );
 };
 
-export default TaskList;
+export default HistoricTaskList;

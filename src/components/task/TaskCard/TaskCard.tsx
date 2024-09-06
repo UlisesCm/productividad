@@ -50,8 +50,9 @@ const TaskCard = ({ task }: TaskCardProps) => {
     <Paper shadow="xs" withBorder p="md">
       <Group justify="space-between">
         <Badge color={TaskStatusColor[status]}>{TaskStatusLabel[status]}</Badge>
-
-        <MenuButton task={task} remainingTimeState={remainingTimeState} />
+        {status !== TaskStatus.FINISHED && (
+          <MenuButton task={task} remainingTimeState={remainingTimeState} />
+        )}
       </Group>
       <Box ml={5}>
         <Text fz={"md"} fw={600}>

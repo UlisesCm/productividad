@@ -1,11 +1,11 @@
 import TaskModal from "../components/task/TaskModal/TaskModal";
 import { TaskProvider } from "../context/TaskContext";
 import CreateTaskButton from "../components/task/CreateTaskButton/CreateTaskButton";
-import { Group, Select } from "@mantine/core";
+import { Group } from "@mantine/core";
 import { useState } from "react";
 import MainLayout from "../layouts/MainLayout/MainLayout";
-import { filterOptions, sortOptions } from "../constants/task.constants";
 import TaskList from "../components/task/TaskList/TaskList";
+import FilterAndSortSelects from "../components/shared/FilterAndSortSelects/FilterAndSortSelects";
 
 const TaskPage = () => {
   const [filter, setFilter] = useState<string | null>(null);
@@ -15,22 +15,12 @@ const TaskPage = () => {
     <MainLayout>
       <TaskProvider>
         <Group align="end" justify="space-between">
-          <Group>
-            <Select
-              label="Filtrar por duración"
-              placeholder="Filtrar por duración..."
-              data={filterOptions}
-              value={filter}
-              onChange={(value) => setFilter(value as string)}
-            />
-            <Select
-              label="Ordenar por"
-              placeholder="Ordenar por..."
-              data={sortOptions}
-              value={sort}
-              onChange={(value) => setSort(value as string)}
-            />
-          </Group>
+          <FilterAndSortSelects
+            filter={filter}
+            setFilter={setFilter}
+            sort={sort}
+            setSort={setSort}
+          />
           <CreateTaskButton />
         </Group>
         <TaskList filter={filter} sort={sort} />

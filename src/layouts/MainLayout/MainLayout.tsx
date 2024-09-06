@@ -11,7 +11,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
   const NavBarButtons = [
     { label: "Tareas", icon: "home", to: "/" },
     { label: "Historial", icon: "home", to: "/historic" },
-    { label: "Gráficas", icon: "home", to: "/" },
+    { label: "Gráficas", icon: "home", to: "/chart" },
   ];
   return (
     <AppShell

@@ -29,11 +29,10 @@ const MenuButtons = ({ task, remainingTimeState }: MenuButtonProps) => {
   };
 
   const handleStatus = (status: TaskStatus) => {
-    console.log("new status", status);
     updateTask({
       ...task,
       status,
-      // remainingTime: remainingTimeState,
+      remainingTime: remainingTimeState,
     });
   };
 
