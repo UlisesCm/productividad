@@ -1,7 +1,6 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { Task } from "../interfaces/task.interface";
 import { TaskStatus } from "../enums/task.enum";
-import { hardCodeData } from "../data/data";
 import { seed } from "../utils/seed";
 
 /**
