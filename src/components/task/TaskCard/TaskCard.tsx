@@ -7,7 +7,7 @@ import {
   TaskStatusLabel,
 } from "../../../enums/task.enum";
 import CountdownTimer from "../CountdownTimer/CountdownTimer";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DBContext } from "../../../context/dbContext";
 import { calculateDifferenceInSeconds } from "../../../utils/calculateDifferenceInSeconds";
 import { formatDate } from "../../../utils/formatDate";
@@ -26,33 +26,60 @@ const TaskCard = ({ task }: TaskCardProps) => {
     remainingTime = 0,
     createdAt,
     updatedAt,
+    totalTime,
   } = task;
   const { updateTask } = useContext(DBContext);
-  const [remainingTimeState, setRemainingTimeState] = useState(remainingTime);
   const [showMore, setShowMore] = useState(false);
+
   const handleDismountTimer = ({
-    initDate,
-    dismountDate,
+    status,
+    remainingTime,
+    totalTime,
   }: {
-    initDate: Date;
-    dismountDate: Date;
+    status: TaskStatus;
+    remainingTime: number;
+    totalTime?: number;
   }) => {
-    const timer = calculateDifferenceInSeconds(initDate, dismountDate);
-    const calc = remainingTimeState - Math.floor(timer);
     updateTask({
       ...task,
-      status: calc <= 0 ? TaskStatus.FINISHED : TaskStatus.PAUSED,
-      remainingTime: calc <= 0 ? 0 : calc,
+      status,
+      remainingTime,
+      ...(totalTime && { totalTime }),
     });
   };
+
+  useEffect(() => {
+    let initCount: Date;
+    if (status === TaskStatus.ACTIVE) {
+      initCount = new Date();
+    }
+    return () => {
+      if (status === TaskStatus.ACTIVE) {
+        const timer = calculateDifferenceInSeconds(
+          initCount as Date,
+          new Date(),
+        );
+        if (timer > 1 || timer < -1) {
+          const calc = remainingTime - Math.floor(timer);
+          const totalTime =
+            timeAssigned - calc > timeAssigned
+              ? timeAssigned
+              : timeAssigned - calc;
+          handleDismountTimer({
+            status: calc >= 0 ? TaskStatus.PAUSED : TaskStatus.FINISHED,
+            remainingTime: calc >= 0 ? calc : 0,
+            totalTime,
+          });
+        }
+      }
+    };
+  }, [status]);
 
   return (
     <Paper shadow="xs" withBorder p="md">
       <Group justify="space-between">
         <Badge color={TaskStatusColor[status]}>{TaskStatusLabel[status]}</Badge>
-        {status !== TaskStatus.FINISHED && (
-          <MenuButton task={task} remainingTimeState={remainingTimeState} />
-        )}
+        {status !== TaskStatus.FINISHED && <MenuButton task={task} />}
       </Group>
       <Box ml={5}>
         <Text fz={"md"} fw={600}>
@@ -63,7 +90,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
       <CountdownTimer
         status={status}
         seconds={remainingTime}
-        setRemainingTimeState={setRemainingTimeState}
+        totalTime={totalTime ?? 0}
         handleDismountTimer={handleDismountTimer}
       />
       <Group justify="center">
@@ -72,7 +99,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
           variant="transparent"
           onClick={() => setShowMore((prev) => !prev)}
         >
-          Mostrar {showMore ? "mas" : "menos"} información
+          Mostrar {!showMore ? "mas" : "menos"} información
         </Button>
       </Group>
       {showMore && (

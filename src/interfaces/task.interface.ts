@@ -9,4 +9,5 @@ export interface Task {
   remainingTime?: number;
   createdAt?: Date;
   updatedAt?: Date;
+  totalTime?: number;
 }

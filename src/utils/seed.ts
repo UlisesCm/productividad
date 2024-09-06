@@ -25,10 +25,10 @@ export function seed(): Task[] {
 
     // Calculate time assigned and remaining time based on status
     const timeAssigned = faker.number.int({ min: 10, max: 7200 });
-    const remainingTime =
-      status === TaskStatus.FINISHED
-        ? 0
-        : faker.number.int({ min: 10, max: timeAssigned });
+    const remainingTime = faker.number.int({
+      min: status === TaskStatus.FINISHED ? 0 : 10,
+      max: timeAssigned,
+    });
 
     tasks.push({
       id: crypto.randomUUID(),

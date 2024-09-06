@@ -3,14 +3,15 @@ import { Task } from "../interfaces/task.interface";
 import { DateTime } from "luxon";
 
 const date = DateTime.now();
+/* DUMMY DATA */
 export const hardCodeData: Task[] = [
   {
     id: "1",
     title: "Task 1",
     description: "Description 1",
     status: TaskStatus.PAUSED,
-    remainingTime: 1800,
-    timeAssigned: 1800,
+    remainingTime: 50,
+    timeAssigned: 50,
     createdAt: date.minus({ days: 1 }).toJSDate(),
     updatedAt: date.minus({ days: 1 }).toJSDate(),
   },

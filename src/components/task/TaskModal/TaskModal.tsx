@@ -63,7 +63,7 @@ const TaskModal = () => {
   const handleSubmit = async (values: typeof form.values) => {
     const time =
       values.predefinedTime === "0"
-        ? arrayNumberToSeconds(values.time)
+        ? arrayNumberToSeconds(values?.time as number[])
         : Number(values.predefinedTime);
     const taskData: Task = {
       id: values.id ?? crypto.randomUUID(),
@@ -96,6 +96,12 @@ const TaskModal = () => {
       time: secondsToArrayNumber(selectedTask?.remainingTime || 0),
     });
   }, [selectedTask]);
+
+  useEffect(() => {
+    if (form.values.time[0] === 2) {
+      form.setValues({ ...form.values, time: [2, 0, 0] });
+    }
+  }, [form.values.time[0]]);
 
   return (
     <Modal

@@ -15,7 +15,7 @@ const FilterAndSortSelects = ({
   setSort,
 }: FilterAndSortSelectsProps) => {
   return (
-    <Group>
+    <Group grow>
       <Select
         label="Filtrar por duración"
         placeholder="Filtrar por duración..."

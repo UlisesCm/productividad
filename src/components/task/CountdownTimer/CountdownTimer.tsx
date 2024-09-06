@@ -3,46 +3,59 @@ import { Box, Group, Text } from "@mantine/core";
 import { secondsToString } from "../../../utils/secondsToString";
 import { TaskStatus } from "../../../enums/task.enum";
 
+/**
+ * Props for the CountdownTimer component.
+ */
 interface CountdownTimerProps {
   status: TaskStatus;
   seconds: number;
-  setRemainingTimeState: (remainingTime: number) => void;
   handleDismountTimer: ({
-    initDate,
-    dismountDate,
+    status,
+    remainingTime,
   }: {
-    initDate: Date;
-    dismountDate: Date;
+    status: TaskStatus;
+    remainingTime: number;
   }) => void;
+  totalTime: number;
 }
 
+/**
+ * Component for displaying a countdown timer.
+ * Updates every second when active.
+ */
 const CountdownTimer = ({
   status,
   seconds,
-  setRemainingTimeState,
   handleDismountTimer,
+  totalTime,
 }: CountdownTimerProps) => {
+  // State for tracking countdown progress
   const [countdown, setCountdown] = useState(seconds);
+  // Reference to the interval ID
   const timerId = React.useRef<number>();
 
   useEffect(() => {
+    // Start counting down when task is active
     if (status === TaskStatus.ACTIVE) {
-      const initDate = new Date();
-
+      // Set up interval to decrement countdown every second
       timerId.current = setInterval(() => {
         setCountdown((prev: number) => {
           if (prev === 0) {
+            console.log("Task finished");
+            handleDismountTimer({
+              status: TaskStatus.FINISHED,
+              remainingTime: 0,
+            });
             clearInterval(timerId.current);
-            setRemainingTimeState(prev);
-            handleDismountTimer({ initDate, dismountDate: new Date() });
             return prev;
           }
-          setRemainingTimeState(prev - 1);
           return prev - 1;
         });
       }, 1000);
+
+      // Cleanup function to stop timer when component unmounts
       return () => {
-        handleDismountTimer({ initDate, dismountDate: new Date() });
+        // handleDismountTimer({ initDate, dismountDate: new Date() });
         clearInterval(timerId.current);
       };
     }
@@ -51,9 +64,11 @@ const CountdownTimer = ({
   return (
     <Group justify="end">
       <Text fz={"sm"}>
-        tiempo restante:{" "}
+        {status === TaskStatus.FINISHED ? "Tiempo total:" : "Tiempo restante:"}{" "}
         <Box component="span" fw={600} c={"blue"}>
-          {secondsToString(countdown)}
+          {status === TaskStatus.FINISHED
+            ? secondsToString(totalTime)
+            : secondsToString(countdown)}
         </Box>
       </Text>
     </Group>
