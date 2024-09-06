@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "pnpm build && vite preview"
   },
   "dependencies": {
     "@faker-js/faker": "^9.0.0",

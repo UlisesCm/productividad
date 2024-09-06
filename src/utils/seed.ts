@@ -29,6 +29,10 @@ export function seed(): Task[] {
       min: status === TaskStatus.FINISHED ? 0 : 10,
       max: timeAssigned,
     });
+    const totalTime = faker.number.int({
+      min: remainingTime,
+      max: timeAssigned,
+    });
 
     tasks.push({
       id: crypto.randomUUID(),
@@ -39,6 +43,7 @@ export function seed(): Task[] {
       updatedAt,
       remainingTime,
       timeAssigned,
+      totalTime,
     });
   }
 
