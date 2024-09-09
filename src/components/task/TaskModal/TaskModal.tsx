@@ -81,7 +81,6 @@ const TaskModal = () => {
       addTask(taskData);
     }
     onClose();
-    console.log(values);
   };
 
   useEffect(() => {
