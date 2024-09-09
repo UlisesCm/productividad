@@ -2,7 +2,6 @@ import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { Task } from "../interfaces/task.interface";
 import { TaskStatus } from "../enums/task.enum";
 import { seed } from "../utils/seed";
-import { hardCodeData } from "../data/data";
 
 /**
  * Props for the DBContext.
@@ -46,7 +45,7 @@ export const DBContext = createContext<ContextProps>({
  */
 export const DBProvider = ({ children }: PropsWithChildren) => {
   // State for storing all tasks
-  const [data, setData] = useState<Task[]>(hardCodeData);
+  const [data, setData] = useState<Task[]>([]);
 
   // State for handling filtering
   const [filter, setFilter] = useState<string | null>(null);
@@ -113,8 +112,8 @@ export const DBProvider = ({ children }: PropsWithChildren) => {
    * Seed the initial data when the component mounts.
    */
   useEffect(() => {
-    // const dataSeed = seed();
-    // setData(dataSeed);
+    const dataSeed = seed();
+    setData(dataSeed);
   }, []);
 
   return (
