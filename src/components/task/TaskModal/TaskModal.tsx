@@ -70,8 +70,8 @@ const TaskModal = () => {
       title: values.title,
       description: values.description,
       status: values.status,
-      timeAssigned: time,
-      remainingTime: time,
+      timeAssigned: time > 7200 ? 7200 : time,
+      remainingTime: time > 7200 ? 7200 : time,
       createdAt: values.createdAt ?? new Date(),
       updatedAt: values.updatedAt ?? new Date(),
     };
