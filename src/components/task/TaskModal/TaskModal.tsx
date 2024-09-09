@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 
 import { Form, useForm, zodResolver } from "@mantine/form";
-import { TaskStatus } from "../../../enums/task.enum";
+import { DurationOptions, TaskStatus } from "../../../enums/task.enum";
 import { Task } from "../../../interfaces/task.interface";
 import {
   durationOptions,
@@ -81,9 +81,16 @@ const TaskModal = () => {
       addTask(taskData);
     }
     onClose();
+    console.log(values);
   };
 
   useEffect(() => {
+    const predefinedTime = Object.values(DurationOptions).includes(
+      `${selectedTask?.timeAssigned}` as DurationOptions,
+    )
+      ? (`${selectedTask?.timeAssigned}` as string)
+      : "0";
+
     form.setValues({
       id: selectedTask?.id || "",
       title: selectedTask?.title || "",
@@ -94,6 +101,7 @@ const TaskModal = () => {
       createdAt: selectedTask?.createdAt,
       updatedAt: selectedTask?.updatedAt,
       time: secondsToArrayNumber(selectedTask?.remainingTime || 0),
+      predefinedTime,
     });
   }, [selectedTask]);
 

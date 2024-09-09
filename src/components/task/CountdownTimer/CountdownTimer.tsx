@@ -26,8 +26,8 @@ interface CountdownTimerProps {
 const CountdownTimer = ({
   status,
   seconds,
-  handleDismountTimer,
   totalTime,
+  handleDismountTimer,
 }: CountdownTimerProps) => {
   // State for tracking countdown progress
   const [countdown, setCountdown] = useState(seconds);
@@ -41,7 +41,6 @@ const CountdownTimer = ({
       timerId.current = setInterval(() => {
         setCountdown((prev: number) => {
           if (prev === 0) {
-            console.log("Task finished");
             handleDismountTimer({
               status: TaskStatus.FINISHED,
               remainingTime: 0,
@@ -55,11 +54,16 @@ const CountdownTimer = ({
 
       // Cleanup function to stop timer when component unmounts
       return () => {
-        // handleDismountTimer({ initDate, dismountDate: new Date() });
         clearInterval(timerId.current);
       };
     }
   }, [status]);
+
+  useEffect(() => {
+    if (countdown !== seconds) {
+      setCountdown(seconds);
+    }
+  }, [seconds]);
 
   return (
     <Group justify="end">

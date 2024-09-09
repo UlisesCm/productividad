@@ -69,12 +69,20 @@ const MenuButtons = ({ task }: MenuButtonProps) => {
    * Restart the timer and change the task status.
    */
   const handleRestartTimer = () => {
-    updateTask({
+    if (task.status === TaskStatus.ACTIVE) {
+      alert(
+        "La tarea está activa, por favor pausala antes de reiniciar el contador.",
+      );
+      return;
+    }
+    const newTask = {
       ...task,
       remainingTime: task.timeAssigned,
       status:
         task.status === TaskStatus.FINISHED ? TaskStatus.PAUSED : task.status,
-    });
+    };
+
+    updateTask(newTask);
   };
 
   /**

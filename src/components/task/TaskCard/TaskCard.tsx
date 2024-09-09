@@ -28,6 +28,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
     updatedAt,
     totalTime,
   } = task;
+
   const { updateTask } = useContext(DBContext);
   const [showMore, setShowMore] = useState(false);
 

@@ -10,7 +10,7 @@ export const hardCodeData: Task[] = [
     title: "Task 1",
     description: "Description 1",
     status: TaskStatus.PAUSED,
-    remainingTime: 50,
+    remainingTime: 30,
     timeAssigned: 50,
     createdAt: date.minus({ days: 1 }).toJSDate(),
     updatedAt: date.minus({ days: 1 }).toJSDate(),
