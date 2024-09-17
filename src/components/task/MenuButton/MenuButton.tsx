@@ -116,7 +116,7 @@ const MenuButtons = ({ task }: MenuButtonProps) => {
         <Menu.Dropdown>
           <Menu.Item onClick={handleEdit}>Editar</Menu.Item>
           <Menu.Item onClick={handlePauseAndPlay}>
-            {task.status === TaskStatus.ACTIVE ? "Pause" : "Resume"}
+            {task.status === TaskStatus.ACTIVE ? "Pausar" : "Iniciar"}
           </Menu.Item>
           <Menu.Item onClick={handleRestartTimer}>Reiniciar contador</Menu.Item>
           <Menu.Item onClick={handleFinish}>Marcar como finalizado</Menu.Item>

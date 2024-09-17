@@ -12,6 +12,7 @@ import { DBContext } from "../../../context/dbContext";
 import { calculateDifferenceInSeconds } from "../../../utils/calculateDifferenceInSeconds";
 import { formatDate } from "../../../utils/formatDate";
 import { secondsToString } from "../../../utils/secondsToString";
+import { RestartButton } from "../RestartButton/RestartButton";
 
 interface TaskCardProps {
   task: Task;
@@ -80,7 +81,11 @@ const TaskCard = ({ task }: TaskCardProps) => {
     <Paper shadow="xs" withBorder p="md">
       <Group justify="space-between">
         <Badge color={TaskStatusColor[status]}>{TaskStatusLabel[status]}</Badge>
-        {status !== TaskStatus.FINISHED && <MenuButton task={task} />}
+        {status !== TaskStatus.FINISHED ? (
+          <MenuButton task={task} />
+        ) : (
+          <RestartButton task={task} />
+        )}
       </Group>
       <Box ml={5}>
         <Text fz={"md"} fw={600}>
