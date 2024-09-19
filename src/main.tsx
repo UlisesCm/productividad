@@ -26,11 +26,11 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")!).render(
-  <MantineProvider>
-    <StrictMode>
+  <StrictMode>
+    <MantineProvider>
       <DBProvider>
         <RouterProvider router={router} />
       </DBProvider>
-    </StrictMode>
-  </MantineProvider>,
+    </MantineProvider>
+  </StrictMode>,
 );

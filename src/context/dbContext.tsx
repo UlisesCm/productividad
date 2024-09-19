@@ -18,10 +18,6 @@ interface ContextProps {
     id: string;
     newRemainingTime: number;
   }) => void;
-  handleFilter: {
-    filter: string | null;
-    setFilter: (order: string) => void;
-  };
 }
 
 /**
@@ -33,10 +29,6 @@ export const DBContext = createContext<ContextProps>({
   updateTask: () => {},
   removeTask: () => {},
   updateTimer: () => {},
-  handleFilter: {
-    filter: "",
-    setFilter: () => {},
-  },
 });
 
 /**
@@ -46,9 +38,6 @@ export const DBContext = createContext<ContextProps>({
 export const DBProvider = ({ children }: PropsWithChildren) => {
   // State for storing all tasks
   const [data, setData] = useState<Task[]>([]);
-
-  // State for handling filtering
-  const [filter, setFilter] = useState<string | null>(null);
 
   /**
    * Add a new task to the data.
@@ -124,7 +113,6 @@ export const DBProvider = ({ children }: PropsWithChildren) => {
         updateTask,
         removeTask,
         updateTimer,
-        handleFilter: { filter, setFilter },
       }}
     >
       {children}

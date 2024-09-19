@@ -10,11 +10,13 @@ import { useNavigate } from "react-router-dom";
  */
 const MainLayout = ({ children }: PropsWithChildren) => {
   const [opened, { toggle }] = useDisclosure();
+
   const navigate = useNavigate();
+
   const NavBarButtons = [
-    { label: "Tareas", icon: "home", to: "/" },
-    { label: "Historial", icon: "home", to: "/historic" },
-    { label: "Gráfica", icon: "home", to: "/chart" },
+    { label: "Tareas", to: "/" },
+    { label: "Historial", to: "/historic" },
+    { label: "Gráfica", to: "/chart" },
   ];
 
   return (

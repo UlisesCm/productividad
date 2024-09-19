@@ -16,7 +16,7 @@ export function processData(tasks: Task[]): { day: string; Tareas: number }[] {
   ).reverse();
 
   // Initialize an array to store task counts per day
-  const taskCountByDay: { [key: string]: number } = {};
+  const taskCountByDay: { [day: string]: number } = {};
 
   // Iterate through tasks and count completed ones within the last 5 days
   tasks.forEach((task) => {

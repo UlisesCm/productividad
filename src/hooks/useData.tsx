@@ -115,7 +115,7 @@ export function useData({ data, source, filter, sort }: UseDataProps) {
   };
 
   useEffect(() => {
-    // Filter tasks based on source type (historical vs ongoing)
+    // Filter tasks based on source type
     let tasksFilter = [];
     if (source === Source.HISTORIC) {
       tasksFilter = data.filter((task) => task.status === TaskStatus.FINISHED);
